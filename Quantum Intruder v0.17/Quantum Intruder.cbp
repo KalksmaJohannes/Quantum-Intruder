@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Quantum Intruder" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SFML_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SFML_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="SFML/include" />
+			<Add directory="box2d/include" />
+		</Compiler>
+		<Linker>
+			<Add library="sfml-graphics" />
+			<Add library="sfml-window" />
+			<Add library="sfml-system" />
+			<Add library="sfml-audio" />
+			<Add library="box2d" />
+			<Add directory="SFML/lib" />
+			<Add directory="box2d/lib" />
+		</Linker>
+		<Unit filename="ArchivoRanking.cpp" />
+		<Unit filename="ArchivoRanking.h" />
+		<Unit filename="Background.cpp" />
+		<Unit filename="Background.h" />
+		<Unit filename="BackgroundMenu.cpp" />
+		<Unit filename="BackgroundMenu.h" />
+		<Unit filename="BackgroundPause.cpp" />
+		<Unit filename="BackgroundPause.h" />
+		<Unit filename="Block.cpp" />
+		<Unit filename="Block.h" />
+		<Unit filename="BlockBackground.cpp" />
+		<Unit filename="BlockBackground.h" />
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
+		<Unit filename="Collisionable.cpp" />
+		<Unit filename="Collisionable.h" />
+		<Unit filename="Conversions.h" />
+		<Unit filename="DebugDraw.cpp" />
+		<Unit filename="DebugDraw.h" />
+		<Unit filename="Director.cpp" />
+		<Unit filename="Director.h" />
+		<Unit filename="Door.cpp" />
+		<Unit filename="Door.h" />
+		<Unit filename="Elevator.cpp" />
+		<Unit filename="Elevator.h" />
+		<Unit filename="Gameplay.cpp" />
+		<Unit filename="Gameplay.h" />
+		<Unit filename="HealthImage.cpp" />
+		<Unit filename="HealthImage.h" />
+		<Unit filename="Key.cpp" />
+		<Unit filename="Key.h" />
+		<Unit filename="Laser.cpp" />
+		<Unit filename="Laser.h" />
+		<Unit filename="LevelImage.cpp" />
+		<Unit filename="LevelImage.h" />
+		<Unit filename="MenuInstructions.cpp" />
+		<Unit filename="MenuInstructions.h" />
+		<Unit filename="MenuMain.cpp" />
+		<Unit filename="MenuMain.h" />
+		<Unit filename="MenuOptions.cpp" />
+		<Unit filename="MenuOptions.h" />
+		<Unit filename="MenuPause.cpp" />
+		<Unit filename="MenuPause.h" />
+		<Unit filename="MenuPlay.cpp" />
+		<Unit filename="MenuPlay.h" />
+		<Unit filename="MenuRanking.cpp" />
+		<Unit filename="MenuRanking.h" />
+		<Unit filename="MenuSelectLevel.cpp" />
+		<Unit filename="MenuSelectLevel.h" />
+		<Unit filename="MenuWin.cpp" />
+		<Unit filename="MenuWin.h" />
+		<Unit filename="MenuWriteName.cpp" />
+		<Unit filename="MenuWriteName.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
+		<Unit filename="PlayerDead.cpp" />
+		<Unit filename="PlayerDead.h" />
+		<Unit filename="Ramp.cpp" />
+		<Unit filename="Ramp.h" />
+		<Unit filename="Ranking.cpp" />
+		<Unit filename="Ranking.h" />
+		<Unit filename="Scene1.cpp" />
+		<Unit filename="Scene1.h" />
+		<Unit filename="Scene2.cpp" />
+		<Unit filename="Scene2.h" />
+		<Unit filename="Scene3.cpp" />
+		<Unit filename="Scene3.h" />
+		<Unit filename="Scene4.cpp" />
+		<Unit filename="Scene4.h" />
+		<Unit filename="Scene5.cpp" />
+		<Unit filename="Scene5.h" />
+		<Unit filename="Scene6.cpp" />
+		<Unit filename="Scene6.h" />
+		<Unit filename="Scene7.cpp" />
+		<Unit filename="Scene7.h" />
+		<Unit filename="Scene8.cpp" />
+		<Unit filename="Scene8.h" />
+		<Unit filename="Scene9.cpp" />
+		<Unit filename="Scene9.h" />
+		<Unit filename="Spike.cpp" />
+		<Unit filename="Spike.h" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
