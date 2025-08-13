@@ -1,0 +1,57 @@
+# 📦 Prerequisitos
+*.d
+
+# 🧱 Archivos objeto compilados
+*.slo
+*.lo
+*.o
+*.obj
+
+# ⚡ Encabezados precompilados
+*.gch
+*.pch
+
+# 🔗 Archivos del linker
+*.ilk
+
+# 🐞 Archivos del debugger
+*.pdb
+*.dwo
+*.stackdump
+
+# 🧬 Librerías dinámicas compiladas
+*.so
+*.dylib
+*.dll
+
+# 🧪 Librerías estáticas compiladas
+*.lai
+*.la
+*.a
+*.lib
+
+# 🧮 Módulos de Fortran (por si acaso)
+*.mod
+*.smod
+
+# 🚀 Ejecutables
+*.exe
+*.out
+*.app
+
+# 🧹 Archivos temporales
+*.tmp
+*.swp
+*~
+
+# 🧠 Archivos específicos de Code::Blocks
+*.layout
+*.depend
+*.cbp.save
+*.autosave
+*.layout.save
+*.layout.autosave
+
+# 🖥️ Archivos de sistema
+.DS_Store
+Thumbs.db
