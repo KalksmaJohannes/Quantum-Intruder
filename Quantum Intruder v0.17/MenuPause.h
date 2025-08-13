@@ -3,6 +3,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundPause.h"
 
 
@@ -31,6 +32,14 @@ class MenuPause{
 
         void updateColors();
 
+        sf::Sound _soundNavigate;
+
+        sf::SoundBuffer _soundBufferNavigate;
+
+        sf::Sound _soundSelect;
+
+        sf::SoundBuffer _soundBufferSelect;
+
     public:
         MenuPause(float width, float height);
 
@@ -47,4 +56,6 @@ class MenuPause{
         void setMusicActive();
 
         void setSfxActive();
+
+        void changeVolume();
 };

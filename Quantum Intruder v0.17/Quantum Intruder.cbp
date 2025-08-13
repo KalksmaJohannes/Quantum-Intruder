@@ -43,6 +43,8 @@
 			<Add directory="SFML/lib" />
 			<Add directory="box2d/lib" />
 		</Linker>
+		<Unit filename="AnimationRespawn.cpp" />
+		<Unit filename="AnimationRespawn.h" />
 		<Unit filename="ArchivoRanking.cpp" />
 		<Unit filename="ArchivoRanking.h" />
 		<Unit filename="Background.cpp" />
@@ -78,6 +80,8 @@
 		<Unit filename="Laser.h" />
 		<Unit filename="LevelImage.cpp" />
 		<Unit filename="LevelImage.h" />
+		<Unit filename="Loading.cpp" />
+		<Unit filename="Loading.h" />
 		<Unit filename="MenuInstructions.cpp" />
 		<Unit filename="MenuInstructions.h" />
 		<Unit filename="MenuMain.cpp" />

@@ -7,6 +7,7 @@ class Background: public sf::Drawable{
 
     private:
         sf::Sprite _sprite;
+
         sf::Texture _texture;
 
     public:

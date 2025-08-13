@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <iomanip>
 #include <SFML/Graphics.hpp>
 #include "Scene1.h"
 #include "Scene2.h"
@@ -13,6 +13,7 @@
 #include "Scene9.h"
 #include "Background.h"
 #include "Ranking.h"
+#include "Loading.h"
 
 
 class Gameplay{
@@ -36,6 +37,8 @@ class Gameplay{
         Scene9 _mapa9;
 
         Background _background;
+
+        Loading _loading;
 
         sf::RenderWindow& _window;
 
@@ -67,6 +70,8 @@ class Gameplay{
 
         Ranking _ranking;
 
+        int _previousLevel = 2;
+
     public:
         Gameplay(sf::RenderWindow& window);
 
@@ -75,6 +80,8 @@ class Gameplay{
         bool getTimeTrialMode();
 
         void setLevel(int level);
+
+        int getLevel();
 
         void resetGameCompleted();
 
@@ -89,4 +96,6 @@ class Gameplay{
         void pause();
 
         void start();
+
+        void changeVolume();
 };

@@ -73,5 +73,7 @@ class Scene7: public sf::Drawable{
 
         bool getSceneClear();
 
+        void changeVolume();
+
         ~Scene7();
 };

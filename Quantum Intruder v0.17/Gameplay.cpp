@@ -1,7 +1,5 @@
 #include "Gameplay.h"
-#include <iostream>
-#include <sstream>
-#include <iomanip>
+
 
 Gameplay::Gameplay(sf::RenderWindow& window): _window(window), _textColor(204, 217, 4){
 
@@ -9,6 +7,7 @@ Gameplay::Gameplay(sf::RenderWindow& window): _window(window), _textColor(204, 2
         std::cout<<"No se pudo cargar la fuente";
         exit(-1);
     }
+    _text.setFont(_font);
     _text.setFont(_font);
     _text.setCharacterSize(50);
     _text.setFillColor(_textColor);
@@ -21,6 +20,7 @@ Gameplay::Gameplay(sf::RenderWindow& window): _window(window), _textColor(204, 2
 }
 
 void Gameplay::update(){
+
     switch (_level){
         case 1:
             if (!_mapa1.getSceneClear()){
@@ -118,19 +118,33 @@ void Gameplay::update(){
             else _gameCompleted = true;
         break;
     }
+
     //Actualizar los minutos
     _elapsedTime = _pausedTime + _chronometrer.getElapsedTime();
     float elapsedSeconds = _elapsedTime.asSeconds();
     _minutes = static_cast<int>(elapsedSeconds) / 60;
     _seconds = static_cast<int>(elapsedSeconds) % 60;
+
+    if (_previousLevel == _level){
+        _loading.load();
+
+        _previousLevel ++;
+    }
+
+    _loading.update();
+
 }
 
 void Gameplay::pause(){
+
     _pausedTime += _chronometrer.getElapsedTime();
+
 }
 
 void Gameplay::start(){
+
     _chronometrer.restart();
+
 }
 
 void Gameplay::setTimeTrialMode(bool active){
@@ -139,6 +153,7 @@ void Gameplay::setTimeTrialMode(bool active){
 
     _chronometrer.restart();
     _pausedTime = sf::seconds(0.0f);
+    _previousLevel = 2;
 
 }
 
@@ -151,6 +166,13 @@ bool Gameplay::getTimeTrialMode(){
 void Gameplay::setLevel(int level){
 
     _level = level;
+    _previousLevel = level + 1;
+
+}
+
+int Gameplay::getLevel(){
+
+    return _level;
 
 }
 
@@ -275,5 +297,22 @@ void Gameplay::draw(){
         _text.setString("Time: " + ss.str());
         _window.draw(_text);
     }
+
+    _window.draw(_loading);
+
+}
+
+void Gameplay::changeVolume(){
+
+    _mapa1.changeVolume();
+    _mapa2.changeVolume();
+    _mapa3.changeVolume();
+    _mapa4.changeVolume();
+    _mapa5.changeVolume();
+    _mapa6.changeVolume();
+    _mapa7.changeVolume();
+    _mapa8.changeVolume();
+    _mapa9.changeVolume();
+    _loading.changeVolume();
 
 }

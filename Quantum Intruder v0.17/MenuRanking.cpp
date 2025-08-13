@@ -45,6 +45,11 @@ MenuRanking::MenuRanking(float width, float height) : _selectedItemIndex(0), _en
     goBack.setOrigin(goBack.getLocalBounds().width / 2, goBack.getLocalBounds().height/2);
     _menuItems.push_back(goBack);
 
+    //Inicializar sonidos
+    _soundBuffer.loadFromFile("resources/Audios/select.wav");
+    _sound.setBuffer(_soundBuffer);
+    _sound.setVolume(10.0f);
+
 }
 
 void MenuRanking::update(sf::RenderWindow& window, sf::Event event) {
@@ -52,6 +57,8 @@ void MenuRanking::update(sf::RenderWindow& window, sf::Event event) {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
             case sf::Keyboard::Return:
+                _sound.play();
+
                 _enterPressed = true;
             break;
 
@@ -181,5 +188,16 @@ void MenuRanking::updateStrings(){
     _rankingItems[2].setString("[3] " + _rankingInformation[2]);
     _rankingItems[3].setString("[4] " + _rankingInformation[3]);
     _rankingItems[4].setString("[5] " + _rankingInformation[4]);
+
+}
+
+void MenuRanking::changeVolume(){
+
+    if (_sound.getVolume() != 0.0f){
+        _sound.setVolume(0.0f);
+    }
+    else{
+        _sound.setVolume(10.0f);
+    }
 
 }

@@ -227,6 +227,8 @@ void Scene8::update(){
     /// Se manejan las colisiones del personaje con los pinchos
     for (Spike& spike : _spikes){
         if (_player.isCollision(spike)){
+            _player.playSoundDead();
+
             _deathsCount ++;
 
             switch (_deathsCount){
@@ -274,6 +276,8 @@ void Scene8::update(){
     /// Se manejan las colisiones del personaje con los laseres
     for (Laser& laser: _lasers){
         if (_player.isCollision(laser)){
+            _player.playSoundDead();
+
             _deathsCount ++;
 
             switch (_deathsCount){
@@ -344,6 +348,7 @@ void Scene8::update(){
 
     /// Se maneja la colision del personaje con la llave
     if (_player.isCollision(_key[0])){
+        _key[0].playSound();
         _key[0].spawn(b2Vec2(3, -5));
 
         _door[0].open();
@@ -401,5 +406,12 @@ Scene8::~Scene8(){
         _world.DestroyBody(body);
         body = nextBody;
     }
+
+}
+
+void Scene8::changeVolume(){
+
+    _player.changeVolume();
+    _key[0].changeVolume();
 
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 
 
@@ -21,6 +22,10 @@ class MenuInstructions{
 
         bool _enterPressed;
 
+        sf::Sound _sound;
+
+        sf::SoundBuffer _soundBuffer;
+
     public:
         MenuInstructions(float width, float height);
 
@@ -31,4 +36,6 @@ class MenuInstructions{
         int getSelectedItemIndex();
 
         bool isEnterPressed();
+
+        void changeVolume();
 };

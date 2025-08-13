@@ -1,5 +1,4 @@
 #include "Director.h"
-#include <iostream>
 
 
 Director::Director(sf::RenderWindow& window)
@@ -16,16 +15,28 @@ Director::Director(sf::RenderWindow& window)
     _gameplay(window),
     _gameState(MENU){
 
-        if(!_music.openFromFile("resources/Audios/Musica.wav")){
-            std::cout<<"No se pudo cargar 'Musica.wav'";
-            exit(-1);
-        }
-        _music.setLoop(true);
-        _music.setVolume(7.0f);
-        _music.play();
+
+    _music.openFromFile("resources/Audios/musica.mp3");
+    _music.setLoop(true);
+    _music.setVolume(12.0f);
+    _music.play();
+
+    _music2.openFromFile("resources/Audios/musica 2.wav");
+    _music2.setLoop(true);
+    _music2.setVolume(7.0f);
+
+    _musicFinal.openFromFile("resources/Audios/musica final.wav");
+    _musicFinal.setLoop(true);
+    _musicFinal.setVolume(7.0f);
+
+    _musicWin.openFromFile("resources/Audios/musica win.wav");
+    _musicWin.setLoop(true);
+    _musicWin.setVolume(5.0f);
+
 }
 
 void Director::update(){
+
     while (_window.pollEvent(event)){
         if (event.type == sf::Event::Closed){
             _window.close();
@@ -81,7 +92,8 @@ void Director::update(){
                         _gameplay.setTimeTrialMode(true);
                         _gameplay.setLevel(1);
                         _gameState = GAMEPLAY;
-                        // Inicializar el modo cronometrado
+
+                        changeMusic();
                     break;
 
                     case 1: // Selecci¢n de niveles libre
@@ -107,60 +119,80 @@ void Director::update(){
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(1);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 1:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(2);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 2:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(3);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 3:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(4);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 4:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(5);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 5:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(6);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 6:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(7);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 7:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(8);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 8:
                         _gameplay.setTimeTrialMode(false);
                         _gameplay.setLevel(9);
                         _gameState = GAMEPLAY;
+
+                        changeMusic();
                     break;
 
                     case 9:
                         _menuSelectLevel.resetSelection();
                         _menuPlay.resetSelection();
                         _gameState = START_GAME;
+
+                        changeMusic();
                     break;
                 }
             }
@@ -204,6 +236,7 @@ void Director::update(){
                     case 1:
                         _menuOptions.setSfxActive();
                         _menuPause.setSfxActive();
+                        pausePlaySfx();
                     break;
 
                     case 2:
@@ -233,13 +266,17 @@ void Director::update(){
                     case 1:
                         _menuPause.setSfxActive();
                         _menuOptions.setSfxActive();
+                        pausePlaySfx();
                     break;
 
                     case 2:
                         _gameState = MENU;
                         _menuPause.resetSelection();
                         _menuMain.resetSelection();
+                        _menuPlay.resetSelection();
+                        _menuSelectLevel.resetSelection();
                         start();
+                        changeMusic();
                     break;
                 }
             }
@@ -258,6 +295,7 @@ void Director::update(){
                         }
                         else{
                             _gameState = MENU;
+                            changeMusicWin();
                         }
                     break;
                 }
@@ -277,6 +315,7 @@ void Director::update(){
 
                         _menuMain.resetSelection();
                         _gameState = RANKING;
+                        changeMusicWin();
                     break;
                 }
             }
@@ -287,13 +326,19 @@ void Director::update(){
         if (_isPaused) {
             return;
         }
+
+        if (_gameplay.getTimeTrialMode() && _gameplay.getLevel() == 9) changeMusicFinal();
+
         _gameplay.update();
     }
 
     if (_gameplay.getGameCompleted()){
+        changeMusic();
+
         if (_gameplay.getTimeTrialMode()){
             _gameState = WIN;
             _menuWin.setTimeScore(_gameplay.getTimeScore());
+            changeMusicWin();
         }
         else{
             _gameState = MENU;
@@ -308,17 +353,98 @@ void Director::update(){
 }
 
 void Director::pausePlayMusic(){
-    if(_music.getStatus() == 2){
+
+    if(_gameState == OPTIONS){
+        if (_music.getStatus() == 2){
+            _music.stop();
+        }
+        else{
+            _music.play();
+        }
+    }
+    else if (_gameState == PAUSE && _gameplay.getLevel() == 9 && _gameplay.getTimeTrialMode()){
+        if (_musicFinal.getStatus() == 2){
+            _musicFinal.stop();
+        }
+        else{
+            _musicFinal.play();
+        }
+    }
+    else{
+        if (_music2.getStatus() == 2){
+            _music2.stop();
+        }
+        else{
+            _music2.play();
+        }
+    }
+
+}
+
+void Director::pausePlaySfx(){
+
+    _menuMain.changeVolume();
+    _menuPlay.changeVolume();
+    _menuSelectLevel.changeVolume();
+    _menuRanking.changeVolume();
+    _menuInstructions.changeVolume();
+    _menuOptions.changeVolume();
+    _menuPause.changeVolume();
+    _menuWin.changeVolume();
+    _menuWriteName.changeVolume();
+    _gameplay.changeVolume();
+
+}
+
+void Director::changeMusic(){
+
+    if (_gameState == GAMEPLAY && _music.getStatus() == 2){
         _music.stop();
-    } else _music.play();
+        _music2.play();
+    }
+    else if (_gameState != GAMEPLAY && _music2.getStatus() == 2){
+        _music2.stop();
+        _music.play();
+    }
+    else if (_gameState != GAMEPLAY && _musicFinal.getStatus() == 2){
+        _musicFinal.stop();
+        _music.play();
+    }
+
+}
+
+void Director::changeMusicFinal(){
+
+    if (_gameState == GAMEPLAY && _music2.getStatus() == 2){
+        _music2.stop();
+        _musicFinal.play();
+    }
+
+}
+
+void Director::changeMusicWin(){
+
+    if (_gameState == WIN && _musicFinal.getStatus() == 2){
+        _musicFinal.stop();
+        _musicWin.play();
+    }
+    else if (_gameState != WIN && _musicWin.getStatus() == 2){
+        _musicWin.stop();
+        _music.play();
+    }
+
 }
 
 void Director::pause(){
+
     _isPaused = true;
+
 }
 
 void Director::start(){
+
     _isPaused = false;
+
 }
 
 void Director::draw(){

@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <box2d/box2d.h>
 #include "Conversions.h"
 #include "Collisionable.h"
+#include "AnimationRespawn.h"
 
 
 enum class PlayerState {
@@ -44,7 +46,17 @@ class Player: public Collisionable{
 
         bool _canJump;
 
+        sf::Sound _soundJump;
+
+        sf::SoundBuffer _soundJumpBuffer;
+
+        sf::Sound _soundDead;
+
+        sf::SoundBuffer _soundDeadBuffer;
+
         sf::Clock _jumpClock;
+
+        mutable AnimationRespawn _animationRespawn;
 
 
     public:
@@ -69,4 +81,8 @@ class Player: public Collisionable{
         void endContact();
 
         void respawn(float x, float y);
+
+        void playSoundDead();
+
+        void changeVolume();
 };

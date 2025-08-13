@@ -29,6 +29,11 @@ Key::Key(b2World& world, float x, float y){
     // Inicializar atributos de la llave
     _frames = 0;
 
+    //Inicializar sonido
+    _soundBuffer.loadFromFile("resources/Audios/llave.wav");
+    _sound.setBuffer(_soundBuffer);
+    _sound.setVolume(7.0f);
+
 }
 
 void Key::update(){
@@ -62,5 +67,22 @@ void Key::spawn(b2Vec2 position){
 
     _body->SetTransform(position, 0);
     _body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+}
+
+void Key::playSound(){
+
+    _sound.play();
+
+}
+
+void Key::changeVolume(){
+
+    if (_sound.getVolume() != 0.0f){
+        _sound.setVolume(0.0f);
+    }
+    else{
+        _sound.setVolume(7.0f);
+    }
 
 }

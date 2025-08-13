@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 
 
@@ -25,6 +26,14 @@ class MenuSelectLevel{
 
         void updateColors();
 
+        sf::Sound _soundNavigate;
+
+        sf::SoundBuffer _soundBufferNavigate;
+
+        sf::Sound _soundSelect;
+
+        sf::SoundBuffer _soundBufferSelect;
+
     public:
         MenuSelectLevel(float width, float height);
 
@@ -37,4 +46,6 @@ class MenuSelectLevel{
         bool isEnterPressed();
 
         void resetSelection();
+
+        void changeVolume();
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 #include "ArchivoRanking.h"
 
@@ -30,6 +31,14 @@ class MenuOptions{
 
         void updateColors();
 
+        sf::Sound _soundNavigate;
+
+        sf::SoundBuffer _soundBufferNavigate;
+
+        sf::Sound _soundSelect;
+
+        sf::SoundBuffer _soundBufferSelect;
+
     public:
         MenuOptions(float width, float height);
 
@@ -48,4 +57,6 @@ class MenuOptions{
         void setSfxActive();
 
         void deleteData();
+
+        void changeVolume();
 };

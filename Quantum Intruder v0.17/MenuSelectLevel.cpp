@@ -63,6 +63,15 @@ MenuSelectLevel::MenuSelectLevel(float width, float height) : _selectedItemIndex
     goBack.setOrigin(goBack.getLocalBounds().width / 2, goBack.getLocalBounds().height/2);
     _menuItems.push_back(goBack);
 
+    //Inicializar sonidos
+    _soundBufferNavigate.loadFromFile("resources/Audios/navigate.wav");
+    _soundNavigate.setBuffer(_soundBufferNavigate);
+    _soundNavigate.setVolume(10.0f);
+
+    _soundBufferSelect.loadFromFile("resources/Audios/select.wav");
+    _soundSelect.setBuffer(_soundBufferSelect);
+    _soundSelect.setVolume(10.0f);
+
 }
 
 void MenuSelectLevel::update(sf::RenderWindow& window, sf::Event event) {
@@ -78,6 +87,8 @@ void MenuSelectLevel::update(sf::RenderWindow& window, sf::Event event) {
             break;
 
             case sf::Keyboard::Return:
+                _soundSelect.play();
+
                 _enterPressed = true;
             break;
 
@@ -122,6 +133,8 @@ bool MenuSelectLevel::isEnterPressed() {
 void MenuSelectLevel::moveUp() {
 
     if (_selectedItemIndex - 1 >= 0) {
+        _soundNavigate.play();
+
         _selectedItemIndex--;
 
         updateColors();
@@ -132,6 +145,8 @@ void MenuSelectLevel::moveUp() {
 void MenuSelectLevel::moveDown() {
 
     if (_selectedItemIndex + 1 < static_cast<int>(_menuItems.size())) {
+        _soundNavigate.play();
+
         _selectedItemIndex++;
 
         updateColors();
@@ -157,5 +172,18 @@ void MenuSelectLevel::resetSelection(){
     _selectedItemIndex = 0;
 
     updateColors();
+
+}
+
+void MenuSelectLevel::changeVolume(){
+
+    if (_soundNavigate.getVolume() != 0.0f){
+        _soundNavigate.setVolume(0.0f);
+        _soundSelect.setVolume(0.0f);
+    }
+    else{
+        _soundNavigate.setVolume(10.0f);
+        _soundSelect.setVolume(10.0f);
+    }
 
 }

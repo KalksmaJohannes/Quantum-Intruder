@@ -36,6 +36,15 @@ MenuOptions::MenuOptions(float width, float height) : _selectedItemIndex(0), _en
     goBack.setOrigin(goBack.getLocalBounds().width / 2, goBack.getLocalBounds().height/2);
     _menuItems.push_back(goBack);
 
+    //Inicializar sonidos
+    _soundBufferNavigate.loadFromFile("resources/Audios/navigate.wav");
+    _soundNavigate.setBuffer(_soundBufferNavigate);
+    _soundNavigate.setVolume(10.0f);
+
+    _soundBufferSelect.loadFromFile("resources/Audios/select.wav");
+    _soundSelect.setBuffer(_soundBufferSelect);
+    _soundSelect.setVolume(10.0f);
+
 }
 
 void MenuOptions::update(sf::RenderWindow& window, sf::Event event) {
@@ -51,6 +60,8 @@ void MenuOptions::update(sf::RenderWindow& window, sf::Event event) {
             break;
 
             case sf::Keyboard::Return:
+                _soundSelect.play();
+
                 _enterPressed = true;
             break;
 
@@ -95,6 +106,8 @@ bool MenuOptions::isEnterPressed() {
 void MenuOptions::moveUp() {
 
     if (_selectedItemIndex - 1 >= 0) {
+        _soundNavigate.play();
+
         _selectedItemIndex--;
 
         updateColors();
@@ -105,6 +118,8 @@ void MenuOptions::moveUp() {
 void MenuOptions::moveDown() {
 
     if (_selectedItemIndex + 1 < static_cast<int>(_menuItems.size())) {
+        _soundNavigate.play();
+
         _selectedItemIndex++;
 
         updateColors();
@@ -172,6 +187,19 @@ void MenuOptions::deleteData(){
 
     for (int i=0; i<5; i++){
         archivo.grabarRegistro(ranking);
+    }
+
+}
+
+void MenuOptions::changeVolume(){
+
+    if (_soundNavigate.getVolume() != 0.0f){
+        _soundNavigate.setVolume(0.0f);
+        _soundSelect.setVolume(0.0f);
+    }
+    else{
+        _soundNavigate.setVolume(10.0f);
+        _soundSelect.setVolume(10.0f);
     }
 
 }

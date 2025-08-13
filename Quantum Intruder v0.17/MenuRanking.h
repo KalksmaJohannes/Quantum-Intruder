@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 #include "Ranking.h"
 #include "ArchivoRanking.h"
@@ -25,6 +26,10 @@ class MenuRanking{
 
         bool _enterPressed;
 
+        sf::Sound _sound;
+
+        sf::SoundBuffer _soundBuffer;
+
     public:
         MenuRanking(float width, float height);
 
@@ -45,4 +50,6 @@ class MenuRanking{
         void updateRankingInformation(Ranking ranking);
 
         void updateStrings();
+
+        void changeVolume();
 };

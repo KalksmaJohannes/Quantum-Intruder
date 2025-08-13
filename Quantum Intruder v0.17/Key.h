@@ -2,6 +2,7 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <box2d/box2d.h>
 #include "Conversions.h"
 #include "Collisionable.h"
@@ -18,6 +19,10 @@ class Key: public Collisionable{
 
         float _frames;
 
+        sf::Sound _sound;
+
+        sf::SoundBuffer _soundBuffer;
+
 
     public:
         Key(b2World& world, float x, float y);
@@ -29,4 +34,8 @@ class Key: public Collisionable{
         virtual sf::FloatRect getBounds() const override;
 
         void spawn(b2Vec2 position);
+
+        void playSound();
+
+        void changeVolume();
 };

@@ -7,7 +7,7 @@ MenuMain::MenuMain(float width, float height) : _selectedItemIndex(0), _enterPre
 
     _tittle.setFont(_font);
     _tittle.setString("Quantum Intruder");
-    _tittle.setFillColor(sf::Color::White);
+    _tittle.setFillColor(sf::Color::Green);
     _tittle.setPosition(sf::Vector2f(width / 2, height / 10 * 1));
     _tittle.setCharacterSize(90);
     _tittle.setOrigin(_tittle.getLocalBounds().width / 2, _tittle.getLocalBounds().height / 2);
@@ -43,6 +43,15 @@ MenuMain::MenuMain(float width, float height) : _selectedItemIndex(0), _enterPre
     exit.setOrigin(exit.getLocalBounds().width / 2, exit.getLocalBounds().height/2);
     _menuItems.push_back(exit);
 
+    //Inicializar sonidos
+    _soundBufferNavigate.loadFromFile("resources/Audios/navigate.wav");
+    _soundNavigate.setBuffer(_soundBufferNavigate);
+    _soundNavigate.setVolume(10.0f);
+
+    _soundBufferSelect.loadFromFile("resources/Audios/select.wav");
+    _soundSelect.setBuffer(_soundBufferSelect);
+    _soundSelect.setVolume(10.0f);
+
 }
 
 void MenuMain::update(sf::RenderWindow& window, sf::Event event){
@@ -58,6 +67,8 @@ void MenuMain::update(sf::RenderWindow& window, sf::Event event){
             break;
 
             case sf::Keyboard::Return:
+                _soundSelect.play();
+
                 _enterPressed = true;
             break;
 
@@ -102,6 +113,8 @@ bool MenuMain::isEnterPressed(){
 void MenuMain::moveUp(){
 
     if (_selectedItemIndex - 1 >= 0) {
+        _soundNavigate.play();
+
         _selectedItemIndex--;
 
         updateColors();
@@ -112,6 +125,8 @@ void MenuMain::moveUp(){
 void MenuMain::moveDown(){
 
     if (_selectedItemIndex + 1 < static_cast<int>(_menuItems.size())){
+        _soundNavigate.play();
+
         _selectedItemIndex++;
 
         updateColors();
@@ -137,5 +152,18 @@ void MenuMain::resetSelection(){
     _selectedItemIndex = 0;
 
     updateColors();
+
+}
+
+void MenuMain::changeVolume(){
+
+    if (_soundNavigate.getVolume() != 0.0f){
+        _soundNavigate.setVolume(0.0f);
+        _soundSelect.setVolume(0.0f);
+    }
+    else{
+        _soundNavigate.setVolume(10.0f);
+        _soundSelect.setVolume(10.0f);
+    }
 
 }

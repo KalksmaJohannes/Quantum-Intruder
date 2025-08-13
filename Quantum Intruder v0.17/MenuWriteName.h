@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 
 
@@ -27,6 +28,14 @@ class MenuWriteName {
 
         const int _maxLength = 5;
 
+        sf::Sound _soundNavigate;
+
+        sf::SoundBuffer _soundBufferNavigate;
+
+        sf::Sound _soundSelect;
+
+        sf::SoundBuffer _soundBufferSelect;
+
     public:
         MenuWriteName(float width, float height);
 
@@ -41,4 +50,6 @@ class MenuWriteName {
         void clearName();
 
         bool isEnterPressed();
+
+        void changeVolume();
 };

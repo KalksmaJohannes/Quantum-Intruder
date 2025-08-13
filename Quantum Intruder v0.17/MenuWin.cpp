@@ -25,6 +25,11 @@ MenuWin::MenuWin(float width, float height) : _selectedItemIndex(0), _enterPress
     goBackMenu.setOrigin(goBackMenu.getLocalBounds().width / 2, goBackMenu.getLocalBounds().height/2);
     _menuItems.push_back(goBackMenu);
 
+    //Inicializar sonidos
+    _soundBuffer.loadFromFile("resources/Audios/select.wav");
+    _sound.setBuffer(_soundBuffer);
+    _sound.setVolume(10.0f);
+
 }
 
 void MenuWin::update(sf::RenderWindow& window, sf::Event event) {
@@ -32,6 +37,8 @@ void MenuWin::update(sf::RenderWindow& window, sf::Event event) {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
             case sf::Keyboard::Return:
+                _sound.play();
+
                 _enterPressed = true;
             break;
 
@@ -118,5 +125,16 @@ std::string MenuWin::timeScoreToString(){
 
 
     return timeScore;
+
+}
+
+void MenuWin::changeVolume(){
+
+    if (_sound.getVolume() != 0.0f){
+        _sound.setVolume(0.0f);
+    }
+    else{
+        _sound.setVolume(10.0f);
+    }
 
 }

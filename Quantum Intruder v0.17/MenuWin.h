@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BackgroundMenu.h"
 
 
@@ -25,6 +26,10 @@ class MenuWin{
 
         std::string timeScoreToString();
 
+        sf::Sound _sound;
+
+        sf::SoundBuffer _soundBuffer;
+
     public:
         MenuWin(float width, float height);
 
@@ -39,4 +44,6 @@ class MenuWin{
         sf::Time getTimeScore();
 
         bool isEnterPressed();
+
+        void changeVolume();
 };

@@ -45,6 +45,15 @@ Player::Player(b2World& world, float x, float y){
     _isJumping = false;
     _state = PlayerState::Idle;
 
+    // Inicializar los sonidos del personaje
+    _soundJumpBuffer.loadFromFile("resources/Audios/salto.wav");
+    _soundJump.setBuffer(_soundJumpBuffer);
+    _soundJump.setVolume(10.0f);
+
+    _soundDeadBuffer.loadFromFile("resources/Audios/muerte.wav");
+    _soundDead.setBuffer(_soundDeadBuffer);
+    _soundDead.setVolume(12.0f);
+
 }
 
 void Player::cmd(){
@@ -68,6 +77,7 @@ void Player::cmd(){
             _jumpClock.restart();
             _currentJumpForce = 0.0f;
             _jumpKeyReleased = false;
+            _soundJump.play();
         }
 
         if (_isJumping && _currentJumpForce != _maxJumpForce){
@@ -145,6 +155,8 @@ void Player::update(){
     b2Vec2 position = _body->GetPosition();
     _playerSprite.setPosition(toPixels(position.x), toPixels(position.y));
 
+    _animationRespawn.update();
+
 }
 
 void Player::draw(sf::RenderTarget& target) const{
@@ -156,6 +168,10 @@ void Player::draw(sf::RenderTarget& target) const{
 
     target.draw(_playerSprite);
     target.draw(_footSprite);
+
+    if (_animationRespawn.getIsRespawning()){
+        _animationRespawn.draw(target);
+    }
 
 }
 
@@ -206,5 +222,26 @@ void Player::respawn(float x, float y){
     //std::cout << "respawn: Executing respawn" << std::endl;
     _body->SetTransform(b2Vec2(x + toMeters(_playerSprite.getGlobalBounds().width/2.0f), y + toMeters(_playerSprite.getGlobalBounds().height/2.0f)), 0);
     _body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+    _animationRespawn.respawn(x + 0.5, y + 0.5);
+
+}
+
+void Player::playSoundDead(){
+
+    _soundDead.play();
+
+}
+
+void Player::changeVolume(){
+
+    if (_soundJump.getVolume() != 0){
+        _soundJump.setVolume(0.0f);
+        _soundDead.setVolume(0.0f);
+    }
+    else{
+        _soundJump.setVolume(10.0f);
+        _soundDead.setVolume(12.0f);
+    }
 
 }

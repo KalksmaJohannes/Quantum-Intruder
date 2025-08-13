@@ -32,6 +32,15 @@ MenuWriteName::MenuWriteName(float width, float height) : _selectedItemIndex(0),
     goBackMenu.setOrigin(goBackMenu.getLocalBounds().width / 2, goBackMenu.getLocalBounds().height / 2);
     _menuItems.push_back(goBackMenu);
 
+    //Inicializar sonidos
+    _soundBufferNavigate.loadFromFile("resources/Audios/navigate.wav");
+    _soundNavigate.setBuffer(_soundBufferNavigate);
+    _soundNavigate.setVolume(10.0f);
+
+    _soundBufferSelect.loadFromFile("resources/Audios/select.wav");
+    _soundSelect.setBuffer(_soundBufferSelect);
+    _soundSelect.setVolume(10.0f);
+
 }
 
 void MenuWriteName::update(sf::RenderWindow& window, sf::Event event){
@@ -39,6 +48,8 @@ void MenuWriteName::update(sf::RenderWindow& window, sf::Event event){
     if (event.type == sf::Event::KeyPressed){
         switch (event.key.code){
             case sf::Keyboard::Return:
+                _soundSelect.play();
+
                 _enterPressed = true;
             break;
 
@@ -53,9 +64,13 @@ void MenuWriteName::update(sf::RenderWindow& window, sf::Event event){
             char enteredChar = static_cast<char>(event.text.unicode);
 
             if (enteredChar == 8 && !_namePlayer.empty()){
+                _soundNavigate.play();
+
                 _namePlayer.pop_back();
             }
             else if (enteredChar >= 32 && enteredChar <= 126 && static_cast<int>(_namePlayer.size()) < _maxLength){
+                _soundNavigate.play();
+
                 _namePlayer += enteredChar;
             }
 
@@ -113,4 +128,17 @@ bool MenuWriteName::isEnterPressed(){
 
 
     return false;
+}
+
+void MenuWriteName::changeVolume(){
+
+    if (_soundNavigate.getVolume() != 0.0f){
+        _soundNavigate.setVolume(0.0f);
+        _soundSelect.setVolume(0.0f);
+    }
+    else{
+        _soundNavigate.setVolume(10.0f);
+        _soundSelect.setVolume(10.0f);
+    }
+
 }
