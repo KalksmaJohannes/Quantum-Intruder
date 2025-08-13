@@ -55,3 +55,7 @@
 # 🖥️ Archivos de sistema
 .DS_Store
 Thumbs.db
+
+# 🚫 Carpetas de compilación
+bin/
+obj/
